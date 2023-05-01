@@ -15,13 +15,14 @@ console.log(user)
 // insert param format insert(name,email,mobile,password)
     UserModel.insert(user.name,user.email,user.mobile,user.password)
     .then(a=>{console.log("#status-sucessful")
-    res.redirect("http://localhost:5500/view/")
+    res.status(200).send(a)
 
 })
     .catch(err=>{
        
         console.log(err,"#status-fail")
-        res.redirect("http://localhost:5500/view/")
+        res.status(400).send(err)
+        
     })
 
  }
