@@ -19,10 +19,17 @@ static insert(name,email,mobile,password) {
       
 }
 
+static find_By_Login_Email(email_Id){
+    //it will return promise
+   return  login_db_model.findAll({where:{email:email_Id}})
+
+}
 
 
  }
 
-
-
+// function find_By_Login_Email() {
+   
+// }
+// find_By_Login_Email()
 
