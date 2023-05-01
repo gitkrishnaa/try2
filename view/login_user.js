@@ -17,11 +17,11 @@ const sign_up_btn=document.getElementById("login_btn")
 
 
 
-sign_up_btn.addEventListener("click",()=>{
-
+login_btn.addEventListener("click",()=>{
+console.log("login button is clicked")
   async function abc(){
     //this function return respusnse as promise which acess using .then(), .catch()
-    return await axios.post('http://localhost:4200/user/signup', {
+    return await axios.post('http://localhost:4200/user/login', {
       
        email:user_email.value,
       
@@ -29,10 +29,24 @@ sign_up_btn.addEventListener("click",()=>{
       })
       
 }
-abc().then(a=>{
-  console.log(a,"ok")
-  alert("sign up sucessfull")
+abc().then(result=>{
+if(result.data.length>0){
+    // alert("user email id exist")
+console.log(result.data[0].password)
+if(user_password.value==result.data[0].password){
+    alert("login sucessful")
+}
+else{
+    alert("wrong password")
+}
+
+}
+else{
+    alert("user email id not exist 404")
+}
+console.log(result.data)
 })
+
 .catch(err=>{console.log(err)
 alert("user already exist")
 })
