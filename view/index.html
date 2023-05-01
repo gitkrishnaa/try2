@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
-    <script src="main.js"></script>
+   
 </head>
 <body>
     <h1>Daily Expense app</h1>
     <div>
 <div>
-<form action="" method="post">
+<form action="http://localhost:4200/user/signup" method="post">
 <label for="name">your name:</label>
-<input type="text" required="true">
+<input type="text" required="true" name="name" value="kk">
 <br><br>
 <label for="name">your email:</label>
-<input type="email" required="true">
+<input type="email" required="true" name="email" value="kri@gma.com">
+<br><br><label for="name">Mobile:</label>
+<input type="number" required="true" name="mobile" value="7894561230">
 <br><br>
 <label for="name">password:</label>
-<input type="password" required="true">
+<input type="password" required="true" name="password" value="123">
 <br><br>
 <button type="submit">sign up</button>
 
@@ -37,4 +39,8 @@
 
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="main.js"></script>
+
 </html>
