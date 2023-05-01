@@ -13,7 +13,7 @@
 // const user_email=document.getElementById("user_email")
 const user_mobile=document.getElementById("user_mobile")
 const user_password=document.getElementById("user_password")
-const sign_up_btn=document.getElementById("login_btn")
+const login_btn=document.getElementById("login_btn")
 
 
 
@@ -34,7 +34,8 @@ if(result.data.length>0){
     // alert("user email id exist")
 console.log(result.data[0].password)
 if(user_password.value==result.data[0].password){
-    alert("login sucessful")
+    alert("login sucessful");
+  window.location="expense_page.html"
 }
 else{
     alert("wrong password")

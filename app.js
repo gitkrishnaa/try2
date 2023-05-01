@@ -1,11 +1,13 @@
 const db=require("./db_model/login_user.js");
+const db_expense=require("./db_model/expense_record.js");
+
 const express=require("express");
 const app=express();
 const port=4200;
 //parsing form data using bodyparser 
 const body_parser=require("body-parser")
 app.use(body_parser.urlencoded({extended:false}))
-console.log(body_parser)
+// console.log(body_parser)
 app.use(express.json())//it parse axios post data
 const cors=require("cors")//it cors rule for api
 app.use(cors())
@@ -36,3 +38,9 @@ db.sync()
 app.listen(port,()=>{
     console.log("port has been started at port",port)
 })
+
+db_expense.sync()
+.then(a=>{
+    console.log("expense record db created")
+})
+.catch((err)=>{console.log(err)})

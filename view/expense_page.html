@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+   
+</head>
+<body>
+    <h1>Daily Expense app</h1>
+    <h1>login page</h1>
+    <div>
+<div>
+ 
+
+<label for="name">Expense Amount</label>
+<input type="number" required="true" name="expense_amount"  id="expense_amount">
+<br><br>
+<label for="name">discription</label>
+<input type="text" required="true" name="discription"  id="discription">
+<br><br>
+<label for="name">catogary</label>
+<select name="catogary" id="catogary">
+
+<option value="fuel">fuel</option>
+<option value="x">x</option>
+<option value="yz">y</option>
+
+
+
+</select>
+
+<br><br>
+
+<input type="hidden" name="user_email_id"  id="user_email_id" value="myemail">
+</form>
+
+<button type="submit" id="save_expense">save</button>
+
+
+
+</div>
+
+
+
+
+    </div>
+
+    <div id="display_data"></div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="expense.js"></script>
+
+</html>
