@@ -54,16 +54,16 @@ display.appendChild(div1)
 
 const expense=document.createElement("span")
 div1.appendChild(expense)
-expense.innerText=element.expenses
+expense.innerText=element.expenses+" "
 
 const description=document.createElement("span")
 div1.appendChild(description)
-description.innerText=element.description
+description.innerText=element.description+" "
 
 
 const catogary=document.createElement("span")
 div1.appendChild(catogary)
-catogary.innerText=element.catogary
+catogary.innerText=element.catogary+" "
 
 const delete_btn=document.createElement("button")
 div1.appendChild(delete_btn)
