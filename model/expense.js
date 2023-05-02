@@ -22,4 +22,14 @@ static fetch_all_expense(){
     console.log("fetch expense all data in db :from model/expenses")
     return login_db_model.findAll();
 }
+static delete_by_id(expense_id){
+    return login_db_model.destroy({where:{id:expense_id}});
+}
+static edit_expense_data(expense_id){
+
+    return login_db_model.findByPk(expense_id)
+    
+
+
+}
  }

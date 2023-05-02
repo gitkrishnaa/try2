@@ -12,9 +12,7 @@
 const expense_amount=document.getElementById("expense_amount")
 const discription=document.getElementById("discription")
 const catogary=document.getElementById("catogary")
-
 const user_email_id=document.getElementById("user_email_id")
-
 const save_expense=document.getElementById("save_expense")
 
 
@@ -42,9 +40,12 @@ abc().then(a=>{
 async function fetchAllExpenses(){
 const result=await axios.get("http://localhost:4200/user/getExpenseData")
 
+const all_data=result;
+
 console.log(result)
 
 result.data.forEach(element => {
+ 
     
 const display=document.getElementById("display_data");
 const div1=document.createElement("div")
@@ -68,10 +69,60 @@ catogary.innerText=element.catogary+" "
 const delete_btn=document.createElement("button")
 div1.appendChild(delete_btn)
 delete_btn.innerText="delete"
+delete_btn.id=element.id;
+
+delete_btn.addEventListener("click",(e)=>{
+
+  axios.post("http://localhost:4200/user/expenseData/"+e.target.id)
+.then(a=>{
+if(a.data==0){
+  alert("expense not exist")
+}
+
+  alert("expense deleted")
+  console.log("delete ok",a)
+  window.location.reload()
+
+})
+.catch(err=>{
+  alert("somthing err, see in console ")
+  console.log("delete not ok",err)
+})
+
+})
+
 
 const edit_btn=document.createElement("button")
 div1.appendChild(edit_btn)
 edit_btn.innerText="edit"
+edit_btn.id=element.id
+edit_btn.addEventListener("click",(e)=>{
+console.log("edit expense button clicked",e.target.id)
+  const expense_amount=document.getElementById("expense_amount")
+  const discription=document.getElementById("discription")
+  const catogary=document.getElementById("catogary")
+  const user_email_id=document.getElementById("user_email_id")
+
+
+
+console.log(all_data,"edit expense data")
+
+  axios.post("http://localhost:4200/user/editExpenseData/"+e.target.id,{
+    expense_amount:expense_amount.value,
+    discription:discription.value,
+    catogary:catogary.value,
+   id:e.target.id
+  })
+.then(a=>{
+console.log(a,"in edit api then")
+window.location.reload();
+
+})
+.catch((err)=>{
+  console.log(err,"in edit api then")
+})
+})
+
 
 const br=document.createElement("br")
 div1.appendChild(edit_btn)
