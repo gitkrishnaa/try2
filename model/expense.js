@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const login_db_model=require("../db_model/expense_record.js");
 
  module.exports=class Product{
@@ -21,6 +22,10 @@ static insert(expenses,description,catogary,user_email_id) {
 static fetch_all_expense(){
     console.log("fetch expense all data in db :from model/expenses")
     return login_db_model.findAll();
+}
+static fetch_One_user_expense(email_id){
+    console.log("fetch expense all data in db :from model/expenses")
+    return login_db_model.findAll({where:{user_email_id:email_id}});
 }
 static delete_by_id(expense_id){
     return login_db_model.destroy({where:{id:expense_id}});

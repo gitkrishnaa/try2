@@ -1,4 +1,5 @@
 const login_db_model=require("../db_model/login_user.js");
+const jwt=require("jsonwebtoken");
 
  module.exports=class Product{
     constructor(id,name,email,mobile,password){
@@ -24,7 +25,11 @@ static find_By_Login_Email(email_Id){
    return  login_db_model.findAll({where:{email:email_Id}})
 
 }
+static jwtTokenGenrate(email_Id,user_name,user_id){
+    // return jwt.sign(email_Id,"sekeretkeyxyz")
+    return jwt.sign({email_Id,user_name,user_id},"sekeretkeyxyz")
 
+}
 
  }
 
