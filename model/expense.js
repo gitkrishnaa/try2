@@ -9,13 +9,14 @@ const login_db_model=require("../db_model/expense_record.js");
     this.mobile=mobile;
     this.password=password;
 }
-static insert(expenses,description,catogary,user_email_id) {
+static insert(expenses,description,catogary,user_email_id,user_id) {
     return login_db_model.create({
         expenses:expenses,
         description:description,
         catogary:catogary,
         user_email_id:user_email_id,
-
+        loginUserId:user_id
+         
         })
       
 }

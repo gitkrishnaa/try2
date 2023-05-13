@@ -10,7 +10,7 @@ module.exports.insert_Data = (req, res) => {
   const id_from_token = req.user.user_id;
 
   expense_model
-    .insert(expense_amount, discription, catogary, email_id_from_token)
+    .insert(expense_amount, discription, catogary, email_id_from_token,id_from_token)
     .then((a) => {
       console.log({
         insert_data: "data iserted sucessfully",

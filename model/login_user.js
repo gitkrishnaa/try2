@@ -15,7 +15,7 @@ static insert(name,email,mobile,password) {
         password:password,
         email:email,
         mobile:mobile,
-
+        premium_user:false,
         })
       
 }

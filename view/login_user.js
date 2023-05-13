@@ -56,6 +56,7 @@ login_btn.addEventListener("click", () => {
 
     .catch((err) => {
       console.log(err);
-      alert("somting bckend problem");
+      alert("somting bckend problem or user not exist");
     });
 });
+

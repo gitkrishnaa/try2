@@ -1,5 +1,4 @@
-const db=require("./db_model/login_user.js");
-const db_expense=require("./db_model/expense_record.js");
+
 
 const express=require("express");
 const app=express();
@@ -11,12 +10,17 @@ app.use(body_parser.urlencoded({extended:false}))
 app.use(express.json())//it parse axios post data
 const cors=require("cors")//it cors rule for api
 app.use(cors())
+
+//login signup  expense route
 const user_route=require("./routes/sign_login.js")
 
 app.use("/user",user_route)
 
+//transction route
 
+const transction_route=require("./routes/transaction_route.js")
 
+app.use("/buyPremium",transction_route)
 
 
 
@@ -27,9 +31,29 @@ app.use("/user",user_route)
 // })
 
 
+//database part
+//relation part
+const db=require("./database.js");
+const db_expense=require("./db_model/expense_record.js");
+const db_user=require("./db_model/login_user.js");
+const transaction_model=require("./db_model/transaction_model.js");
+
+db_user.hasMany(db_expense)
+db_expense.belongsTo(db_user)
+
+db_user.hasMany(transaction_model)
+transaction_model.belongsTo(db_user)
+
+
+
+
+
+
+
+// db.sync({force:true})
 db.sync()
 .then(a=>{
-    console.log("login model or created in db->","from:app.js,login model")
+    console.log("login model or created in db->","from:app.js,login model sucessful")
 
 })
 .catch(a=>{console.log(a,"err in db.sync app.js")})
@@ -39,8 +63,3 @@ app.listen(port,()=>{
     console.log("port has been started at port",port)
 })
 
-db_expense.sync()
-.then(a=>{
-    console.log("expense record db created")
-})
-.catch((err)=>{console.log(err)})

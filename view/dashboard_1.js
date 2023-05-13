@@ -36,7 +36,14 @@ save_expense.addEventListener("click", () => {
       catogary: catogary.value,
       user_email_id: user_email_id.value,
       Headers: { authorization_token: localStorage.getItem("jwtkey") },
-    });
+    },
+    {
+      headers: {
+        'Authorization': localStorage.getItem("jwtkey") 
+      }
+    }
+    
+    );
   }
   abc()
     .then((a) => {

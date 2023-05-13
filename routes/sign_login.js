@@ -4,7 +4,10 @@ const routes=express.Router();
 const signup_controller=require("../controller/signup.js")
 const login_controller=require("../controller/loginController.js")
 const expense_data_controller=require("../controller/expense_control.js");
+const dataSender_controller=require("../controller/dataSender_controller.js");
+
 const authenthicate=require("../auth/userAuth.js")
+
 
 
 routes.post("/signup",signup_controller.signup);
@@ -17,6 +20,10 @@ routes.post("/expenseData/:id",expense_data_controller.delete_by_id);
 routes.post("/editExpenseData/:id",expense_data_controller.edit_expense_data);
 //fetch all expense data
 routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email);
+
+//fetch all important user data
+routes.post("/getUserData",dataSender_controller.User_all_Data);
+
 
 
 
