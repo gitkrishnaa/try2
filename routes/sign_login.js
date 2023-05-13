@@ -22,7 +22,7 @@ routes.post("/editExpenseData/:id",expense_data_controller.edit_expense_data);
 routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email);
 
 //fetch all important user data
-routes.post("/getUserData",dataSender_controller.User_all_Data);
+routes.post("/getUserData",authenthicate.authenticate_user,dataSender_controller.User_all_Data);
 
 
 

@@ -21,7 +21,7 @@ save_expense.addEventListener("click", () => {
     //authorize user by checking jwtkey aviliable ii locastorage or not
     const jwtToken = localStorage.getItem("jwtkey");
     if (!jwtToken) {
-      const resp = confirm("please login/signup to acess this page");
+      const resp = confirm("please login/signup to access this page");
       if (resp) {
         location.href = "login_page.html";
       } else {
