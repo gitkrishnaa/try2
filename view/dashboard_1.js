@@ -38,9 +38,7 @@ save_expense.addEventListener("click", () => {
       Headers: { authorization_token: localStorage.getItem("jwtkey") },
     },
     {
-      headers: {
-        'Authorization': localStorage.getItem("jwtkey") 
-      }
+      headers:{"Authorization":localStorage.getItem("jwtkey")}
     }
     
     );
@@ -72,7 +70,11 @@ async function fetchAllExpenses() {
     Headers: {
       authorization_token: jwtToken,
     },
-  });
+  },
+    {
+      headers:{"Authorization":localStorage.getItem("jwtkey")}
+    }
+  );
   const userName = document.getElementById("user_name");
   const userEmail = document.getElementById("user_email");
   const userDetails = result.data.userDetails;

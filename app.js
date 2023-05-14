@@ -22,6 +22,12 @@ const transction_route=require("./routes/transaction_route.js")
 
 app.use("/buyPremium",transction_route)
 
+//user data sender route
+
+
+const user_data_sender_route=require("./routes/userDataSender.js")
+
+app.use("/userData",user_data_sender_route)
 
 
 //testing

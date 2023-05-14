@@ -23,6 +23,10 @@ const product_model = sequelize_db_connection.define("login_user", {
     type: Sequelize.BOOLEAN,
     
     allowNull: false,
+  },
+  totalExpenses:{
+    type: Sequelize.NUMBER,
+    allowNull: false,
   }
 });
 

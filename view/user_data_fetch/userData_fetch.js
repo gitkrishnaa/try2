@@ -11,17 +11,15 @@ const user_info_load=async()=>{
     }
 
 try {
-    const resposne=await axios.post("http://localhost:4200/user/getUserData", {
+    const resposne=await axios.post("http://localhost:4200/userData/p/user/transaction", {
         expense_amount: expense_amount.value,
         discription: discription.value,
         catogary: catogary.value,
         user_email_id: user_email_id.value,
         Headers: { authorization_token: localStorage.getItem("jwtkey") },
       },
-      {
-        headers: {
-          'Authorization': localStorage.getItem("jwtkey") 
-        }
+      {   
+      headers:{"Authorization":localStorage.getItem("jwtkey")}    
       }
       
       )
