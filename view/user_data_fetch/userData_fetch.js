@@ -11,12 +11,7 @@ const user_info_load=async()=>{
     }
 
 try {
-    const resposne=await axios.post("http://localhost:4200/userData/p/user/transaction", {
-        expense_amount: expense_amount.value,
-        discription: discription.value,
-        catogary: catogary.value,
-        user_email_id: user_email_id.value,
-        Headers: { authorization_token: localStorage.getItem("jwtkey") },
+    const resposne=await axios.post("http://localhost:4200/userData/p/user", {
       },
       {   
       headers:{"Authorization":localStorage.getItem("jwtkey")}    
@@ -26,22 +21,35 @@ try {
 
       console.log(resposne)
 
-//deketeing bu premieum button
+//deleteing buy premieum button
 const status=resposne.data[0].premium_user
 if(status){
-    
 
-const buyPremium_button=document.getElementById("rzp-button1");
-buyPremium_button.remove()
-alert("user is premium")
-
+// alert("user is premium")
 }
-
 else{
-    alert("user is not premium")
+    // alert("user is not premium")
 }
-
      
+
+// user eami name and toexpense show in dashboard.html
+ const userName = document.getElementById("user_name");
+  const userEmail = document.getElementById("user_email");
+  const userTotal_expees = document.getElementById("user_TotalExoenses");
+
+  // console.log(resposne.data[0].email)
+  const userDetails = resposne.data[0]
+  userName.innerText = userDetails.name;
+  userEmail.innerText = userDetails.email;
+  userTotal_expees.innerText=userDetails.totalExpenses
+
+
+
+
+
+
+
+
 } catch (error) {
     console.log(error)
 }

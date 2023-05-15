@@ -25,9 +25,9 @@ static find_By_Login_Email(email_Id){
    return  login_db_model.findAll({where:{email:email_Id}})
 
 }
-static jwtTokenGenrate(email_Id,user_name,user_id){
+static jwtTokenGenrate(email_Id,user_name,user_id,isPremium){
     // return jwt.sign(email_Id,"sekeretkeyxyz")
-    return jwt.sign({email_Id,user_name,user_id},"sekeretkeyxyz")
+    return jwt.sign({email_Id,user_name,user_id,isPremium},"sekeretkeyxyz")
 
 }
 

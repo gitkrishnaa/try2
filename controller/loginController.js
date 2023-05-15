@@ -15,9 +15,10 @@ UserModel.find_By_Login_Email(req.body.email)
     // if()
         const user_name=a[0].dataValues.name;
         const user_id=a[0].dataValues.id;
+        const isPremium=a[0].dataValues.premium_user
         console.log(user_name,user_id,"user exist in db login m:from logincontroller................")
      //SENDING JWT TOKEN   
-      const token=  UserModel.jwtTokenGenrate(req.body.email,user_name,user_id)
+      const token=  UserModel.jwtTokenGenrate(req.body.email,user_name,user_id,isPremium)
 res.json({token:token,a})
 })
 .catch(err=>{

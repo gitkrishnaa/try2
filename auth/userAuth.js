@@ -7,7 +7,7 @@ module.exports.authenticate_user=(req,res,next)=>{
    
     try {
         console.log("................................................. userAutha()")
-        console.log(req.headers)
+        // console.log(req.headers)
         // const token=req.body.Headers.authorization_token
         const token=req.header("Authorization")
         console.log("token header--",token)

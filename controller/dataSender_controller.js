@@ -28,7 +28,7 @@ module.exports.User_details = (req, res) => {
   login_user
     .findAll({
       where: { id: req.user.user_id },
-    //   attributes: ["id", "mobile", "name", "email", "premium_user"],
+      attributes: ["id", "mobile", "name", "email", "premium_user","totalExpenses"],
     })
     .then((a) => {
       res.status(200).send(a);

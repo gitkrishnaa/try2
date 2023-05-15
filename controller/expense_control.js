@@ -1,4 +1,6 @@
 const expense_model = require("../model/expense.js");
+const login_users = require("../db_model/login_user.js");
+const expenses_model = require("../db_model/expense_record.js");
 
 module.exports.insert_Data = (req, res) => {
   // const {expense_amount,discription,catogary,user_email_id}=req.body
@@ -10,13 +12,39 @@ module.exports.insert_Data = (req, res) => {
   const id_from_token = req.user.user_id;
 
   expense_model
-    .insert(expense_amount, discription, catogary, email_id_from_token,id_from_token)
-    .then((a) => {
+    .insert(
+      expense_amount,
+      discription,
+      catogary,
+      email_id_from_token,
+      id_from_token
+    )
+    .then(async (a) => {
       console.log({
         insert_data: "data iserted sucessfully",
         user: req.user,
-        x: [4, 5],
       });
+      try {
+        //inserting user total expenes in ligin user table
+        // const totalExpense_current=await login_users.findByPk(id_from_token,)
+        const totalExpense_current = await login_users.findByPk(id_from_token);
+        const totalExpense_current_value =
+          totalExpense_current.dataValues.totalExpenses;
+        // console.log("total expenses:",totalExpense_current.dataValues.totalExpenses)
+        totalExpense_current.totalExpenses =
+          +expense_amount + +totalExpense_current_value;
+        await totalExpense_current.save();
+        // console.log("................ updating totalexpense in user table.............")
+
+        console.log("after update :", totalExpense_current);
+
+        // console.log("..............end...........................")
+      } catch (error) {
+        // console.log("................ updating totalexpense in user table has error.............")
+        console.log(error);
+        // console.log("..............end...........................")
+      }
+
       res.send(a);
     })
     .catch((err) => {
@@ -66,31 +94,117 @@ module.exports.fetchbyUser_specific_email = (req, res) => {
     });
 };
 
-module.exports.delete_by_id = (req, res) => {
+module.exports.delete_by_id = async (req, res) => {
   const id = req.params.id;
 
   console.log(
-    "expense data deltete_by_id opreation :from controller deletebyid"
+    "expense data deltete_by_id opreation :from controller deletebyid",
+    req.body
   );
-  // res.send("delete id="+req.params.id)
-  expense_model
-    .delete_by_id(id)
-    .then((a) => {
-      console.log("data deleted of id", id);
-      res.status(200).json(a);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-      console.log(
-        "somtong err in expense data delete by id",
-        "status code 400"
-      );
-      console.log(err);
-    });
+  try {
+    const user_id = req.user.user_id;
+    //inserting user total expenes in ligin user table
+    // const totalExpense_current=await login_users.findByPk(id_from_token,)
+    const totalExpense_current = await login_users.findByPk(user_id);
+    const expense_amount = await expenses_model.findByPk(id); //expenseAmount_in_expense_table
+    console.log(expense_amount);
+    const expense_amount_value = Number(expense_amount.dataValues.expenses); //we get value
+
+    const totalExpense_current_value = Number(
+      totalExpense_current.dataValues.totalExpenses
+    );
+    console.log(
+      "before total expenses:",
+      totalExpense_current,
+      totalExpense_current_value,
+      "id",
+      id
+    );
+    if (totalExpense_current_value <= expense_amount_value) {
+      totalExpense_current.totalExpenses = "0";
+      const response=await totalExpense_current.save();
+      console.log("response of totalexpense-delete anount", response);
+    } else {
+      totalExpense_current.totalExpenses =
+        totalExpense_current_value - expense_amount_value;
+      const response = await totalExpense_current.save();
+      console.log("response of totalexpense-delete anount", response);
+    }
+    // totalExpense_current.totalExpenses =expense_amount
+    // await totalExpense_current.save();
+    console.log(
+      "................ updating totalexpense in user table............."
+    );
+
+    console.log("after update :", totalExpense_current);
+
+    console.log("..............end...........................");
+
+    expense_model
+      .delete_by_id(id)
+      .then(async (a) => {
+        console.log("data deleted of id", id, a);
+        res.status(200).json(a);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+        console.log(
+          "somtong err in expense data delete by id",
+          "status code 400"
+        );
+        console.log(err);
+      });
+  } catch (error) {
+    console.log(
+      "................ updating totalexpense in user table has error............."
+    );
+    console.log(error);
+    // console.log("..............end...........................")
+  }
+
+  //delete data in expense table
 };
-module.exports.edit_expense_data = (req, res) => {
-  console.log(req.body);
+module.exports.edit_expense_data =async (req, res) => {
+  // console.log(req.body)
   const { expense_amount, discription, catogary, id } = req.body;
+  const user_id=req.user.user_id;
+    const expense_id=req.params.id;
+  try {
+    // const user_id=req.user.user_id;
+    // const expense_id=req.params.id;
+    //inserting user total expenes in ligin user table
+    // const totalExpense_current=await login_users.findByPk(id_from_token,)
+    const edit_expense_amount=Number(expense_amount);
+    const totalExpense_current = await login_users.findByPk(user_id);
+    const expense_amount_current=await expenses_model.findByPk(expense_id) //expenseAmount_in_expense_table
+    console.log(expense_amount_current)
+   const  expense_amount_value=Number(expense_amount_current.dataValues.expenses) //we get value
+
+    const totalExpense_current_value =Number(totalExpense_current.dataValues.totalExpenses)
+    console.log("before total expenses:",totalExpense_current,totalExpense_current_value,"id",id)
+if(totalExpense_current_value<= edit_expense_amount){
+  totalExpense_current.totalExpenses =edit_expense_amount
+  const response=await totalExpense_current.save();
+  console.log("response of totalexpense-delete amount",response)
+}
+else{
+  //logic- final total expense in user tabel=previous totalexpense-current expense amount + edit expense amount value
+  totalExpense_current.totalExpenses =totalExpense_current_value - expense_amount_value + edit_expense_amount
+  const response=await totalExpense_current.save();
+  console.log("response of totalexpense-delete amount",response)
+}
+    // totalExpense_current.totalExpenses =expense_amount 
+    // await totalExpense_current.save();
+    console.log("................ updating totalexpense in user table.............")
+
+    console.log("after update :", totalExpense_current);
+
+    console.log("..............end...........................")
+
+
+    // expense data editing part 
+    console.log(req.body);
+  
   expense_model
     .edit_expense_data(req.params.id)
     .then((a) => {
@@ -108,4 +222,10 @@ module.exports.edit_expense_data = (req, res) => {
       console.log(err);
       res.status(404).send(err);
     });
+  } catch (error) {
+    console.log("................ updating totalexpense in user table has error.............")
+    console.log(error);
+    // console.log("..............end...........................")
+  }
+  
 };

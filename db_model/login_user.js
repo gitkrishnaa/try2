@@ -25,8 +25,8 @@ const product_model = sequelize_db_connection.define("login_user", {
     allowNull: false,
   },
   totalExpenses:{
-    type: Sequelize.NUMBER,
-    allowNull: false,
+    type: Sequelize.STRING,
+    allowNull: true,
   }
 });
 

@@ -22,7 +22,7 @@ document.getElementById('rzp-button1').onclick = async function(e){
                 order_id:options.order_id,
                 response:resp,
                 payment:true,
-            },{headers:{"Authorization":"token"}})
+            },{headers:{"Authorization":localStorage.getItem("jwtkey")}})
             .then(()=>{
                 alert("you are premiusm user now")
             })

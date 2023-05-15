@@ -75,12 +75,12 @@ async function fetchAllExpenses() {
       headers:{"Authorization":localStorage.getItem("jwtkey")}
     }
   );
-  const userName = document.getElementById("user_name");
-  const userEmail = document.getElementById("user_email");
-  const userDetails = result.data.userDetails;
-  userName.innerText = userDetails.name;
-  userEmail.innerText = userDetails.email;
-  console.log(result, "in fetchAllExpenses() function");
+  // const userName = document.getElementById("user_name");
+  // const userEmail = document.getElementById("user_email");
+  // const userDetails = result.data.userDetails;
+  // userName.innerText = userDetails.name;
+  // userEmail.innerText = userDetails.email;
+  // console.log(result, "in fetchAllExpenses() function");
 
   //logout button
   //logic-just delete the localstorage delete key
@@ -124,7 +124,11 @@ async function fetchAllExpenses() {
 
     delete_btn.addEventListener("click", (e) => {
       axios
-        .post("http://localhost:4200/user/expenseData/" + e.target.id)
+        .post("http://localhost:4200/user/expenseData/" + e.target.id,{
+
+        },
+         {headers:{"Authorization":localStorage.getItem("jwtkey")}}
+        )
         .then((a) => {
           if (a.data == 0) {
             alert("expense not exist");
@@ -159,7 +163,10 @@ async function fetchAllExpenses() {
           discription: discription.value,
           catogary: catogary.value,
           id: e.target.id,
-        })
+        },
+        {headers:{"Authorization":localStorage.getItem("jwtkey")}}
+        
+        )
         .then((a) => {
           console.log(a, "in edit api then");
           window.location.reload();

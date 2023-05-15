@@ -15,14 +15,14 @@ routes.post("/signupApi",signup_controller.signupApi);
 routes.post("/login",login_controller.login_by_email);
 routes.post("/expenseData",authenthicate.authenticate_user,expense_data_controller.insert_Data);
 //to delete expenses by id in database
-routes.post("/expenseData/:id",expense_data_controller.delete_by_id);
+routes.post("/expenseData/:id",authenthicate.authenticate_user,expense_data_controller.delete_by_id);
 //to edit expenses 
-routes.post("/editExpenseData/:id",expense_data_controller.edit_expense_data);
+routes.post("/editExpenseData/:id",authenthicate.authenticate_user,expense_data_controller.edit_expense_data);
 //fetch all expense data
 routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email);
 
 //fetch all important user data
-routes.post("/getUserData",authenthicate.authenticate_user,dataSender_controller.User_all_Data);
+
 
 
 

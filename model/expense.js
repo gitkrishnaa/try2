@@ -15,8 +15,8 @@ static insert(expenses,description,catogary,user_email_id,user_id) {
         description:description,
         catogary:catogary,
         user_email_id:user_email_id,
-        loginUserId:user_id
-         
+        loginUserId:user_id,
+        totalExpenses:"0"
         })
       
 }
