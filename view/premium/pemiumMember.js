@@ -46,21 +46,25 @@ const name=document.createElement("span");
 name.innerText=d.name+" ";
 div.appendChild(name);
 name.style.minWidth="200px"
-name.style.border="2px solid black"
+name.style.border="0.5px solid black"
+name.style.display="inline-block"
+
 
 
 const email=document.createElement("span");
 email.innerText=d.email+" ";
 div.appendChild(email);
 email.style.width="250px"
-email.style.border="2px solid black"
+email.style.border="0.5px solid black"
+email.style.display="inline-block"
 
 
 const totalExpense=document.createElement("span");
 totalExpense.innerText=d.totalExpenses+" ";
 div.appendChild(totalExpense);
 totalExpense.style.width="100px"
-totalExpense.style.border="2px solid black"
+totalExpense.style.border="0.5px solid black"
+totalExpense.style.display="inline-block"
 
 
 

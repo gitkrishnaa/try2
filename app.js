@@ -44,13 +44,16 @@ const db_expense=require("./db_model/expense_record.js");
 const db_user=require("./db_model/login_user.js");
 const transaction_model=require("./db_model/transaction_model.js");
 
+const forget_password_model=require("./db_model/forget_password_record.js");
+
 db_user.hasMany(db_expense)
 db_expense.belongsTo(db_user)
 
 db_user.hasMany(transaction_model)
 transaction_model.belongsTo(db_user)
 
-
+db_user.hasMany(forget_password_model);
+forget_password_model.belongsTo(db_user);
 
 
 

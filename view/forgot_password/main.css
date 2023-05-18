@@ -1,0 +1,57 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#main{
+    /* background-color: rgb(32, 211, 211); */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:rgb(167, 75, 252)
+}
+#sub1{
+    width: 450px;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
+#input_div{
+    /* background-color: rgb(34, 103, 57); */
+}
+#input1{
+ /* background-color: aqua; */
+width: 350px;
+height: 40px;
+border-radius: 5px;
+font-size: 20px;
+border: 3px solid rgb(155, 64, 240);
+text-align: center;
+}
+#sub2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+
+   }
+   #fgp_btn1{
+  
+ margin:10px;
+ border-radius: 5px;
+ width: 150px; 
+ height: 40px;
+ border: none;
+ background-color: rgb(152, 49, 248);
+color: white;
+box-shadow:2px 1px 10px 1px ;
+   }
+   #fgp_btn1:hover{
+    transition: 0.5s;
+    background-color: rgb(84, 1, 161);
+   }

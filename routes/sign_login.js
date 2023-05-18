@@ -5,6 +5,7 @@ const signup_controller=require("../controller/signup.js")
 const login_controller=require("../controller/loginController.js")
 const expense_data_controller=require("../controller/expense_control.js");
 const dataSender_controller=require("../controller/dataSender_controller.js");
+const forget_password_controller=require("../controller/forget_password.js");
 
 const authenthicate=require("../auth/userAuth.js")
 
@@ -21,10 +22,10 @@ routes.post("/editExpenseData/:id",authenthicate.authenticate_user,expense_data_
 //fetch all expense data
 routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email);
 
-//fetch all important user data
+//forgot pasword section
 
 
-
+routes.post("/forget_password",forget_password_controller.fetchEmail)
 
 
 
