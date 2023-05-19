@@ -1,14 +1,14 @@
 const Sequelize = require("sequelize");
 const sequelize_db_connection = require("../database");
-const forget_password_request_model = sequelize_db_connection.define("forget_ps_req", {
+const forget_password_request_model = sequelize_db_connection.define("forget_password_recored", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
  
-  request_id: { type: Sequelize.STRING, allowNull: false },
-  sendinblue_email_send_id:{type: Sequelize.STRING, allowNull: true },
+  system_request_id: { type: Sequelize.STRING, allowNull: false },
+  email_send_id_by_server:{type: Sequelize.STRING, allowNull: true },
  
   isActive:{
     type: Sequelize.STRING, allowNull: false

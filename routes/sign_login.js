@@ -25,7 +25,8 @@ routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_contr
 //forgot pasword section
 
 
-routes.post("/forget_password",forget_password_controller.fetchEmail)
+routes.post("/forget_password",forget_password_controller.fetchEmail);
+routes.post("/reset_password",forget_password_controller.resetPassword);
 
 
 

@@ -14,5 +14,17 @@ if(input_value.value==""){
 const response=await axios.post("http://localhost:4200/user/forget_password",{
     email:input_value.value
 })
+const message_div=document.getElementById("message");
+const message=response.data.message
+if(response.data.user){
+    
+    message_div.innerText=message;
+    message_div.style.color="green";
+}
+else{
+    message_div.innerText=message
+    message_div.style.color="red";
+
+}
 console.log(response)
 })

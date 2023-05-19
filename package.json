@@ -24,6 +24,7 @@
     "nodemailer": "^6.9.2",
     "pug": "^2.0.3",
     "razorpay": "^2.8.6",
-    "sequelize": "^6.31.0"
+    "sequelize": "^6.31.0",
+    "uuid": "^9.0.0"
   }
 }
