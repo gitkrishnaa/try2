@@ -22,6 +22,14 @@ routes.post("/editExpenseData/:id",authenthicate.authenticate_user,expense_data_
 //fetch all expense data
 routes.post("/getExpenseData",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email);
 
+
+//pagination
+routes.get("/ExpenseData_paginated",authenthicate.authenticate_user,expense_data_controller.fetchbyUser_specific_email_pagination);
+
+
+
+
+
 //forgot pasword section
 
 

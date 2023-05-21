@@ -229,3 +229,26 @@ else{
   }
   
 };
+module.exports.fetchbyUser_specific_email_pagination=async(req,res)=>{
+  const limit=Number(req.query.limit);
+  const offset=Number(req.query.page)-1; //page 
+  const skip=limit*offset  //skip
+  const user_email_id=req.user.email_Id
+  console.log("limit:",limit,"page/offset:",offset,"skip:",skip,user_email_id);
+try {
+
+
+ const data=await expenses_model.findAll({
+  where:{user_email_id:user_email_id},
+  offset: skip, limit: limit });
+
+if(data.length<=0){
+  res.send({message:"users data is empty or no more data aviliable after this page",status:false,data:data})
+}else{
+
+  res.send({message:"data is send",data:data,status:true})
+}
+} catch (error) {
+  res.send({message:"error",data:error,status:false})
+}
+}
