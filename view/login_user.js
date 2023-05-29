@@ -11,6 +11,12 @@
 // x.then(a=>{console.log(a,"yghg")})
 // const user_name=document.getElementById("user_name")
 // const user_email=document.getElementById("user_email")
+
+import * as variables from "./variable.js"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+
 const user_mobile = document.getElementById("user_mobile");
 const user_password = document.getElementById("user_password");
 const login_btn = document.getElementById("login_btn");
@@ -21,7 +27,7 @@ login_btn.addEventListener("click", () => {
     //this function return respusnse as promise which acess using .then(), .catch()
     // const jwtToken=localStorage.getItem("jwtkey")
 
-    return await axios.post("http://localhost:4200/user/login", {
+    return await axios.post(webHost+"/user/login", {
       email: user_email.value,
 
       password: user_password.value,

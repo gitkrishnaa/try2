@@ -1,2 +1,2 @@
-export const apiHost=5;
+export const apiHost="http://localhost:4200";
 export const y=6;

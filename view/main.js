@@ -26,7 +26,7 @@ sign_up_btn.addEventListener("click",()=>{
 
   async function abc(){
     //this function return respusnse as promise which acess using .then(), .catch()
-    return await axios.post('http://localhost:4200/user/signup', {
+    return await axios.post(webHost+'/user/signup', {
        name:user_name.value,
        email:user_email.value,
        mobile:user_mobile.value,
@@ -39,7 +39,7 @@ abc().then(a=>{
   alert("sign up sucessfull")
 })
 .catch(err=>{console.log(err)
-alert("user already exist")
+alert("user already exist or backend error")
 })
 
 })

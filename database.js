@@ -10,7 +10,7 @@
 // module.exports=conn.promise()
 
 const Sequelize=require("sequelize")
-const x=new Sequelize()
+
 const sequelizeConnection=new Sequelize("expense_fullstack","root","123456",{
     dialect:"mysql",
     host:"localhost"

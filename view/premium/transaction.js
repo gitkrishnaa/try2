@@ -1,9 +1,14 @@
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
 
+////////////////////////////////////////////////////////////////
 document.getElementById('rzp-button1').onclick = async function(e){
   
     e.preventDefault();
 
-    const response=await axios.get("http://localhost:4200/buyPremium")
+    const response=await axios.get(webHost+"/buyPremium")
     
     
     var options = {
@@ -16,7 +21,7 @@ document.getElementById('rzp-button1').onclick = async function(e){
         "order_id": response.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
         "handler":async function(resp){
-            const send= axios.post("http://localhost:4200/buyPremium",{
+            const send= axios.post(webHost+"/buyPremium",{
                 Headers: { authorization_token: localStorage.getItem("jwtkey") },//jwt token
                 amount:500,
                 order_id:options.order_id,
@@ -38,7 +43,7 @@ document.getElementById('rzp-button1').onclick = async function(e){
     var rzp1 = new Razorpay(options);
     rzp1.open()
     rzp1.on('payment.failed',async function(resp){
-        const send=axios.post("http://localhost:4200/buyPremium",{
+        const send=axios.post(webHost+"/buyPremium",{
             Headers: { authorization_token: localStorage.getItem("jwtkey") },//jwt token
             amount:500,
             order_id:options.order_id,

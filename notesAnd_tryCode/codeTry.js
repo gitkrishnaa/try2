@@ -15,6 +15,6 @@
 
          //expot import plain js vanila js
 
-         import * as x from "../view/variable.js"
-         console.log(x)
+        //  import * as x from "../view/variable.js"
+        //  console.log(x)
 

@@ -1,6 +1,14 @@
+
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+////////////////////////////////////////////////////////////////
+
 const if_premiumUser=async()=>{
     try {
-    const resposne=await axios.post("http://localhost:4200/userData/p/user", {
+    const resposne=await axios.post(webHost+"/userData/p/user", {
       },
       {   
       headers:{"Authorization":localStorage.getItem("jwtkey")}    
@@ -27,7 +35,7 @@ div_of_premium_feature.appendChild(fetchAlluser_btn)
 fetchAlluser_btn.addEventListener("click",async ()=>{
 
 try {
-    const resposne=await axios.post("http://localhost:4200/userData/p/Alluser", {
+    const resposne=await axios.post(webHost+"/userData/p/Alluser", {
     },
     {   
     headers:{"Authorization":localStorage.getItem("jwtkey")}    
