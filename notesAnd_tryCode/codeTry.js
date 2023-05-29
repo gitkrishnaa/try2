@@ -9,8 +9,12 @@
 
 
 // checking is_envdata avilable
-const fun=require("../custom/taskFunction").is_env_data_aviliable
-fun(1,2,5,4)
+// const fun=require("../custom/taskFunction").is_env_data_aviliable
+// fun(1,2,5,4)
          //working fine
 
+         //expot import plain js vanila js
+
+         import * as x from "../view/variable.js"
+         console.log(x)
 

@@ -9,6 +9,11 @@
 // //     console.log(error);
 // //   });
 // x.then(a=>{console.log(a,"yghg")})
+
+import * as variables from "./variable.js"
+const webHost=variables.apiHost
+console.log(webHost)
+
 const user_name=document.getElementById("user_name")
 const user_email=document.getElementById("user_email")
 const user_mobile=document.getElementById("user_mobile")
