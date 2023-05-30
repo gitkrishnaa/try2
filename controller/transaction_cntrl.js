@@ -1,12 +1,24 @@
 const db_transaction=require("../db_model/transaction_model");
 
+
+//.env variale extracting
+require('dotenv').config();
+const RAZORPAY_KEY=process.env.RAZORPAY_KEY;
+const RAZORPAY_PS=process.env.RAZORPAY_PASSWORD;
+//throw error if RAZORPAY_KEY or RAZORPAY_PS is not exist in .env file
+const check_env_variable=require("../custom/taskFunction").is_env_data_aviliable
+check_env_variable(RAZORPAY_KEY,RAZORPAY_PS)
+
+
+
+
 const Razorpay=require('razorpay');
 const { options } = require("../routes/sign_login");
 
 module.exports.create_transaction=async (req,res)=>{
 console.log("transtion pending .............")
 
-const newOrderPayment=new Razorpay({ key_id: 'rzp_test_zdhvBSMTOztAgY', key_secret: '1lUpWcGSb7mMRWx2mDJybyr3' });
+const newOrderPayment=new Razorpay({ key_id: RAZORPAY_KEY, key_secret:RAZORPAY_PS });
 
 const options = {
     amount: 50000,  // amount in the smallest currency unit

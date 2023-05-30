@@ -9,6 +9,11 @@
 // //     console.log(error);
 // //   });
 // x.then(a=>{console.log(a,"yghg")})
+
+import * as variables from "./variable.js"
+const webHost=variables.apiHost
+console.log(webHost)
+
 const user_name=document.getElementById("user_name")
 const user_email=document.getElementById("user_email")
 const user_mobile=document.getElementById("user_mobile")
@@ -21,7 +26,7 @@ sign_up_btn.addEventListener("click",()=>{
 
   async function abc(){
     //this function return respusnse as promise which acess using .then(), .catch()
-    return await axios.post('http://localhost:4200/user/signup', {
+    return await axios.post(webHost+'/user/signup', {
        name:user_name.value,
        email:user_email.value,
        mobile:user_mobile.value,
@@ -34,7 +39,7 @@ abc().then(a=>{
   alert("sign up sucessfull")
 })
 .catch(err=>{console.log(err)
-alert("user already exist")
+alert("user already exist or backend error")
 })
 
 })

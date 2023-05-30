@@ -1,3 +1,11 @@
+
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable.js"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+////////////////////////////////////////////////////////////////
+
 console.log("user data")
 const user_info_load=async()=>{
     const jwtToken = localStorage.getItem("jwtkey");
@@ -11,7 +19,7 @@ const user_info_load=async()=>{
     }
 
 try {
-    const resposne=await axios.post("http://localhost:4200/userData/p/user", {
+    const resposne=await axios.post(webHost+"/userData/p/user", {
       },
       {   
       headers:{"Authorization":localStorage.getItem("jwtkey")}    

@@ -9,6 +9,21 @@
 // //     console.log(error);
 // //   });
 // x.then(a=>{console.log(a,"yghg")})
+
+
+////////////////////////////////////////////////////////////////
+import * as variables from "./variable.js"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 const expense_amount = document.getElementById("expense_amount");
 const discription = document.getElementById("discription");
 const catogary = document.getElementById("catogary");
@@ -30,7 +45,7 @@ save_expense.addEventListener("click", () => {
     }
 
     //this function return respusnse as promise which acess using .then(), .catch()
-    return await axios.post("http://localhost:4200/user/expenseData", {
+    return await axios.post(webHost+"/user/expenseData", {
       expense_amount: expense_amount.value,
       discription: discription.value,
       catogary: catogary.value,
@@ -66,7 +81,7 @@ async function fetchAllExpenses() {
   }
 
   console.log("dashboard");
-  const result = await axios.post("http://localhost:4200/user/getExpenseData", {
+  const result = await axios.post(webHost+"/user/getExpenseData", {
     Headers: {
       authorization_token: jwtToken,
     },
@@ -91,7 +106,7 @@ async function fetchAllExpenses() {
   logout_button.innerText = "Logout";
   logout_button.addEventListener("click", () => {
     localStorage.removeItem("jwtkey")
-    location.reload()
+    window.location="login_user.html"
   });
 
   console.log(result.data.resp, "response_by_api");
@@ -124,7 +139,7 @@ async function fetchAllExpenses() {
 
     delete_btn.addEventListener("click", (e) => {
       axios
-        .post("http://localhost:4200/user/expenseData/" + e.target.id,{
+        .post(webHost+"/user/expenseData/" + e.target.id,{
 
         },
          {headers:{"Authorization":localStorage.getItem("jwtkey")}}
@@ -158,7 +173,7 @@ async function fetchAllExpenses() {
       console.log(all_data, "edit expense data");
 
       axios
-        .post("http://localhost:4200/user/editExpenseData/" + e.target.id, {
+        .post(webHost+"/user/editExpenseData/" + e.target.id, {
           expense_amount: expense_amount.value,
           discription: discription.value,
           catogary: catogary.value,
@@ -195,7 +210,7 @@ async function fetch_paginated_Expenses(limit,page) {
   }
 
   console.log("paginated data fetch");
-  const result = await axios.get(`http://localhost:4200/user/ExpenseData_paginated?limit=${limit}&page=${page}`, 
+  const result = await axios.get(webHost+`/user/ExpenseData_paginated?limit=${limit}&page=${page}`, 
     {
       headers:{"Authorization":localStorage.getItem("jwtkey")}
     }
@@ -255,7 +270,7 @@ async function fetch_paginated_Expenses(limit,page) {
 
     delete_btn.addEventListener("click", (e) => {
       axios
-        .post("http://localhost:4200/user/expenseData/" + e.target.id,{
+        .post(webHost+"/user/expenseData/" + e.target.id,{
 
         },
          {headers:{"Authorization":localStorage.getItem("jwtkey")}}
@@ -289,7 +304,7 @@ async function fetch_paginated_Expenses(limit,page) {
       console.log(all_data, "edit expense data");
 
       axios
-        .post("http://localhost:4200/user/editExpenseData/" + e.target.id, {
+        .post(webHost+"/user/editExpenseData/" + e.target.id, {
           expense_amount: expense_amount.value,
           discription: discription.value,
           catogary: catogary.value,

@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable.js"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+////////////////////////////////////////////////////////////////
+
 const fgp_btn=document.getElementById("fgp_btn1")
 const input_value=document.getElementById("input1")
 
@@ -12,7 +19,7 @@ if(input_value.value==""){
 const query_params = new URLSearchParams(window.location.search);
 const reset_request_id=query_params.get("id")
 console.log(reset_request_id)
-const response=await axios.post("http://localhost:4200/user/reset_password",{
+const response=await axios.post(webHost+"/user/reset_password",{
     password:input_value.value,
     reset_request_id:reset_request_id,
 

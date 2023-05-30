@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable"
+const webHost=variables.apiHost
+console.log(webHost,"variale.js")
+
+////////////////////////////////////////////////////////////////
 const fgp_btn=document.getElementById("fgp_btn1")
 const input_value=document.getElementById("input1")
 
@@ -11,7 +17,7 @@ if(input_value.value==""){
 // working on backend
 
 
-const response=await axios.post("http://localhost:4200/user/forget_password",{
+const response=await axios.post(webHost+"/user/forget_password",{
     email:input_value.value
 })
 const message_div=document.getElementById("message");

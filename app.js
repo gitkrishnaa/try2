@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 
 const express=require("express");
 const app=express();
@@ -43,8 +43,8 @@ const db=require("./database.js");
 const db_expense=require("./db_model/expense_record.js");
 const db_user=require("./db_model/login_user.js");
 const transaction_model=require("./db_model/transaction_model.js");
-
 const forget_password_model=require("./db_model/forget_password_record.js");
+const download_link_model=require("./db_model/download_data.js")
 
 db_user.hasMany(db_expense)
 db_expense.belongsTo(db_user)
@@ -55,6 +55,8 @@ transaction_model.belongsTo(db_user)
 db_user.hasMany(forget_password_model);
 forget_password_model.belongsTo(db_user);
 
+db_user.hasMany(download_link_model);
+download_link_model.belongsTo(db_user);
 
 
 
