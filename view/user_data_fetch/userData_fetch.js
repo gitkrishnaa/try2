@@ -1,6 +1,6 @@
 
 ////////////////////////////////////////////////////////////////
-import * as variables from "../variable"
+import * as variables from "../variable.js"
 const webHost=variables.apiHost
 console.log(webHost,"variale.js")
 

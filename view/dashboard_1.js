@@ -106,7 +106,7 @@ async function fetchAllExpenses() {
   logout_button.innerText = "Logout";
   logout_button.addEventListener("click", () => {
     localStorage.removeItem("jwtkey")
-    location.reload()
+    window.location="login_user.html"
   });
 
   console.log(result.data.resp, "response_by_api");

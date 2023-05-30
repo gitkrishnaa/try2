@@ -38,31 +38,26 @@ login_btn.addEventListener("click", () => {
   abc()
     .then((result) => {
       console.log(result)
-      const userData = result.data.a;
-      console.log(userData, "userdataresponse", result);
-      if (userData.length > 0) {
-        // alert("user email id exist")
-        console.log(userData[0].password);
-        if (user_password.value == userData[0].password) {
-          alert("login sucessful");
-
+      const email=user_email.value;
+      const status=result.data.response.status
+     const message=result.data.response.message
+      if (status) {
           //jwt token store in localstrore with keyword jwt;
           localStorage.setItem("jwtkey", result.data.token);
           console.log("jwt token is localstorge with key= jwtkey");
 
           window.location = "dashboard.html";
-        } else {
-          alert("wrong password");
-        }
-      } else {
-        alert("user email id not exist 404");
+        alert(message)
       }
-      console.log(result);
+      else{
+        alert(message)
+      }
+      
     })
 
     .catch((err) => {
       console.log(err);
-      alert("somting bckend problem or user not exist");
+      alert("somting backend problem or user not exist");
     });
 });
 

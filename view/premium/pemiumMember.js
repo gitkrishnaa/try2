@@ -1,102 +1,93 @@
+////////////////////////////////////////////////////////////////
+import * as variables from "../variable.js";
+const webHost = variables.apiHost;
+console.log(webHost, "variale.js");
 
 ////////////////////////////////////////////////////////////////
-import * as variables from "../variable"
-const webHost=variables.apiHost
-console.log(webHost,"variale.js")
 
-////////////////////////////////////////////////////////////////
-
-const if_premiumUser=async()=>{
-    try {
-    const resposne=await axios.post(webHost+"/userData/p/user", {
-      },
-      {   
-      headers:{"Authorization":localStorage.getItem("jwtkey")}    
+const if_premiumUser = async () => {
+  try {
+    const resposne = await axios.post(
+      webHost + "/userData/p/user",
+      {},
+      {
+        headers: { Authorization: localStorage.getItem("jwtkey") },
       }
-      
-      )
-      console.log(resposne)
+    );
+    console.log(resposne);
 
-//deleteing buy premieum button
-const status=resposne.data[0].premium_user
-if(status){
-const buyPremium_button=document.getElementById("rzp-button1");
-buyPremium_button.remove()
-// alert("user is premium")
+    //deleteing buy premieum button
+    const status = resposne.data[0].premium_user;
+    if (status) {
+      const buyPremium_button = document.getElementById("rzp-button1");
+      buyPremium_button.remove();
+      // alert("user is premium")
 
-//adding premium featurs
-const div_of_premium_feature=document.getElementById("premium_feature_div")
-div_of_premium_feature.innerText="you are premium user"
+      //adding premium featurs
+      const div_of_premium_feature = document.getElementById(
+        "premium_feature_div"
+      );
+      div_of_premium_feature.innerText = "you are premium user";
 
+      const fetchAlluser_btn = document.createElement("button");
+      fetchAlluser_btn.innerText = "fetch all user expense";
+      div_of_premium_feature.appendChild(fetchAlluser_btn);
+      fetchAlluser_btn.addEventListener("click", async () => {
+        try {
+          const resposne = await axios.post(
+            webHost + "/userData/p/Alluser",
+            {},
+            {
+              headers: { Authorization: localStorage.getItem("jwtkey") },
+            }
+          );
 
-const fetchAlluser_btn=document.createElement("button");
-fetchAlluser_btn.innerText="fetch all user expense";
-div_of_premium_feature.appendChild(fetchAlluser_btn)
-fetchAlluser_btn.addEventListener("click",async ()=>{
+          console.log("premium feature-all user expenses", resposne);
+          const final_data = resposne.data.data;
+          console.log("final_data", final_data);
+          const display_html_div = document.getElementById(
+            "display_premium_feature_data"
+          );
 
-try {
-    const resposne=await axios.post(webHost+"/userData/p/Alluser", {
-    },
-    {   
-    headers:{"Authorization":localStorage.getItem("jwtkey")}    
-    })
+          final_data.forEach((d) => {
+            const div = document.createElement("div");
+            display_html_div.appendChild(div);
 
-console.log("premium feature-all user expenses",resposne)
-const final_data=resposne.data.data;
-console.log("final_data",final_data)
-const display_html_div=document.getElementById("display_premium_feature_data");
+            const name = document.createElement("span");
+            name.innerText = d.name + " ";
+            div.appendChild(name);
+            name.style.minWidth = "200px";
+            name.style.border = "0.5px solid black";
+            name.style.display = "inline-block";
 
-final_data.forEach((d)=>{
-   const div=document.createElement("div");
-display_html_div.appendChild(div);
+            const email = document.createElement("span");
+            email.innerText = d.email + " ";
+            div.appendChild(email);
+            email.style.width = "250px";
+            email.style.border = "0.5px solid black";
+            email.style.display = "inline-block";
 
-const name=document.createElement("span");
-name.innerText=d.name+" ";
-div.appendChild(name);
-name.style.minWidth="200px"
-name.style.border="0.5px solid black"
-name.style.display="inline-block"
-
-
-
-const email=document.createElement("span");
-email.innerText=d.email+" ";
-div.appendChild(email);
-email.style.width="250px"
-email.style.border="0.5px solid black"
-email.style.display="inline-block"
-
-
-const totalExpense=document.createElement("span");
-totalExpense.innerText=d.totalExpenses+" ";
-div.appendChild(totalExpense);
-totalExpense.style.width="100px"
-totalExpense.style.border="0.5px solid black"
-totalExpense.style.display="inline-block"
-
-
-
-})
-
-
-
-
-} catch (error) {
-    
-}
-
-})
+            const totalExpense = document.createElement("span");
+            totalExpense.innerText = d.totalExpenses + " ";
+            div.appendChild(totalExpense);
+            totalExpense.style.width = "100px";
+            totalExpense.style.border = "0.5px solid black";
+            totalExpense.style.display = "inline-block";
+          });
+        } catch (error) {}
+      });
+    } else {
+      // alert("user is not premium")
+    }
+  
 
 
 
 
-}
-else{
-    // alert("user is not premium")
-}
-}     
-catch(error){
 
-}
-}
-if_premiumUser()
+
+
+
+} catch (error) {}
+};
+if_premiumUser();
