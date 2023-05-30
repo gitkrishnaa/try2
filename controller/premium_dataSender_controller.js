@@ -58,7 +58,7 @@ const save_download_link=await download_data.create({
   user_email:user_email
 })
 //sending response to frontend
-res.json({message:"sucessful",status:true,data:resp_aws})
+res.json({message:"sucessful done",status:true,data:resp_aws})
 } catch (error) {
   res.json({message:"faild",status:false,data:error})
   console.log("error from uploading file to aws",error)
