@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express=require("express");
 const app=express();
-const port=4200;
+const port=process.env.PORT||4200;
 //parsing form data using bodyparser 
 const body_parser=require("body-parser")
 app.use(body_parser.urlencoded({extended:false}))
@@ -29,7 +29,11 @@ const user_data_sender_route=require("./routes/userDataSender.js")
 
 app.use("/userData",user_data_sender_route)
 
-
+app.use((req,res)=>{
+    console.log(req.url)
+const path=require("path")
+res.sendFile(path.join(__dirname+`/view${req.url}`))
+})
 //testing
 // app.post("/data",(req,res)=>{
 //     console.log(req.body)
