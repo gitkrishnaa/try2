@@ -19,7 +19,7 @@ console.log(webHost,"variale.js")
 
 const user_mobile = document.getElementById("user_mobile");
 const user_password = document.getElementById("user_password");
-const login_btn = document.getElementById("login_btn");
+const login_btn = document.getElementById("login_submit_btn");
 
 login_btn.addEventListener("click", () => {
   console.log("login button is clicked");
