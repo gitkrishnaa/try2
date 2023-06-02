@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js; child-src 'none'; object-src 'none'"> -->
     <title>Document</title>
+   <!-- <meta Content-Security-Policy-Report-Only: default-src 'self'; ...; report-uri /my_amazing_csp_report_parser;> -->
+    <!-- <meta http-equiv-="Content-Security-Policy-Report-Only" content="default-src self"> -->
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="login_page.css">
 
@@ -62,7 +65,8 @@
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"     Content-Security-Policy: default-src https://cdn.example.net; child-src 'none'; object-src 'none'
+></script>
 <script src="login_user.js" type="module"></script>
 
 

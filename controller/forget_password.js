@@ -1,3 +1,4 @@
+require("dotenv").config();
 const user_db = require("../db_model/login_user");
 const forget_password_db = require("../db_model/forget_password_record");
 const { v4 } = require("uuid");
@@ -13,10 +14,10 @@ module.exports.fetchEmail = async (req, res) => {
       function emailSender(sender_email, reciverEmail, messageObj) {
         var nodemailer = require("nodemailer");
         var transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: process.env.EMAIL_SERVICE_NAME,
           auth: {
-            user: "krishna.123project@gmail.com",
-            pass: "hqisbqsstzhqmibr",
+            user:process.env.EMAIL_ID,
+            pass: process.env.EMAIL_SECRET_PASSWORD
           },
         });
         //messageObj is custom object which have message related info
