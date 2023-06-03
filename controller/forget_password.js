@@ -1,6 +1,8 @@
+require("dotenv").config();
 const user_db = require("../db_model/login_user");
 const forget_password_db = require("../db_model/forget_password_record");
 const { v4 } = require("uuid");
+const bcrypt=require("bcrypt")
 
 module.exports.fetchEmail = async (req, res) => {
   console.log(req.body.email);
@@ -12,10 +14,10 @@ module.exports.fetchEmail = async (req, res) => {
       function emailSender(sender_email, reciverEmail, messageObj) {
         var nodemailer = require("nodemailer");
         var transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: process.env.EMAIL_SERVICE_NAME,
           auth: {
-            user: "krishna.123project@gmail.com",
-            pass: "hqisbqsstzhqmibr",
+            user:process.env.EMAIL_ID,
+            pass: process.env.EMAIL_SECRET_PASSWORD
           },
         });
         //messageObj is custom object which have message related info
@@ -25,7 +27,7 @@ module.exports.fetchEmail = async (req, res) => {
           to: reciverEmail,
           subject: "password reset",
           text: messageObj.text,
-          html: `<a href="http://127.0.0.1:5500/view/forgot_reset_password/reset_password.html?id=${uniq_string_generate}" target="_blank"><button>Reset Link</button></a>`,
+          html: `<a href="http://${process.env.HOST}:${5500}/forgot_reset_password/reset_password.html?id=${uniq_string_generate}" target="_blank"><button>Reset Link</button></a>`,
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
@@ -99,15 +101,22 @@ const reset_request_id=req.body.reset_request_id;
 const updataed_password=req.body.password
 console.log("hello",reset_request_id,updataed_password,"from-/contoller/forget_password resetPassword()")
 forget_password_db.findOne({where:{system_request_id:reset_request_id}})
-.then((resp)=>{
+.then( (resp)=>{
 
   if(resp!=null){
 //password updating
    if(resp.isActive==true){
     resp.update({isActive:false})
     user_db.findOne({where:{email:resp.user_email}})//find user using email id
-    .then((resp_update)=>{
-      resp_update.update({password:updataed_password}) //update password
+    .then(async(resp_update)=>{
+     
+      //encrypt password
+      const salt=bcrypt.genSaltSync(10);
+const encrypted_update_password=await bcrypt.hash(updataed_password,salt)
+console.log("encrypted password is=",encrypted_update_password)
+
+
+      resp_update.update({password:encrypted_update_password}) //update password
       res.send({message:"passwoerd has been chaned",status:true,data:resp_update})
       console.log(resp,["reset request id match sucessful,paasword update to the user email" ,resp.user_email])
     })

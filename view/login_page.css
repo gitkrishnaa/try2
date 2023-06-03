@@ -1,0 +1,39 @@
+/* #login_body{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+} */
+@media only screen and (max-width: 500px) {
+    #login_body{
+        width: 100vw;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: bottom;
+        /* border: 2px solid black; */
+    }
+    #login_body_div_main{
+        width: 50%; 
+        height: 60vh;
+        border: 2px solid black;
+     }
+  }
+
+  @media only screen and (min-width: 510px) {
+    #login_body{
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+    }
+    #login_body_div_main{
+        width: 50%; 
+        height: 300px;
+        /* border: 2px solid black; */
+     }
+  }

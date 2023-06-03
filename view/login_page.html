@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js; child-src 'none'; object-src 'none'"> -->
     <title>Document</title>
+   <!-- <meta Content-Security-Policy-Report-Only: default-src 'self'; ...; report-uri /my_amazing_csp_report_parser;> -->
+    <!-- <meta http-equiv-="Content-Security-Policy-Report-Only" content="default-src self"> -->
     <link rel="stylesheet" href="main.css">
-   
+    <link rel="stylesheet" href="login_page.css">
+
+
 </head>
+
 <body>
-    <a href="index.html"><button>signup</button></a>
+    <div id="main_head1">
+        <div id="main_title1">
+            <h1 id="main_title1_h1"><a href="index.html">Daily Expense app</a></h1>
+        </div>
+        <div id="head1">
+            <div id="main_menu1">
+                <div>Home</div>
+                <div>Features</div>
+                <div>About</div>
+            </div>
 
-    <h1>Daily Expense app</h1>
+
+            <div id="login">
+                <div><a href="login_page.html"><button id="login_btn" class="btn1">login page</button></a></div>
+                <div><a href="signup_page.html"><button id="signup_btn" class="btn1">signup page</button></a></div>
+            </div>
+
+        </div>
+    </div>
+    <!-- <a href="signup_page.html"><button>signup page</button></a>
+    <a href="index.html"><button>home page</button></a> -->
+    <!-- <h1>Daily Expense app</h1> -->
     <h1>login page</h1>
-    <div>
-<div>
- 
-
-<label for="name">your email:</label>
-<input type="email" required="true" name="email" value="kri@gma.com" id="user_email">
-<br><br>
-<label for="name">password:</label>
-<input type="password" required="true" name="password" value="123" id="user_password">
-<br><br>
+    <div id="login_body">
+        <div id="login_body_div_main">
 
 
-</form>
+            <label for="name">your email:</label>
+            <input type="email" required="true" name="email" value="kri@gma.com" id="user_email">
+            <br><br>
+            <label for="name">password:</label>
+            <input type="password" required="true" name="password" value="123" id="user_password">
+            <br><br>
 
-<button type="submit" id="login_btn">login</button>
+
+            </form>
+
+            <button type="submit" id="login_submit_btn">submit</button>
 
 
+            <a href="./forgot_reset_password/index.html"><button>forgot password</button>
+            </a>
+        </div>
 
-</div>
-
-<a href="./forgot_password/index.html"><button >forgot password</button>
-</a>
+       
 
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"     Content-Security-Policy: default-src https://cdn.example.net; child-src 'none'; object-src 'none'
+></script>
 <script src="login_user.js" type="module"></script>
 
 

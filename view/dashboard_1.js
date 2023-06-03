@@ -10,19 +10,12 @@
 // //   });
 // x.then(a=>{console.log(a,"yghg")})
 
+////////////////////////////////////////////////////////////////
+import * as variables from "./variable.js";
+const webHost = variables.apiHost;
+console.log(webHost, "variale.js");
 
 ////////////////////////////////////////////////////////////////
-import * as variables from "./variable.js"
-const webHost=variables.apiHost
-console.log(webHost,"variale.js")
-
-////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 const expense_amount = document.getElementById("expense_amount");
 const discription = document.getElementById("discription");
@@ -30,6 +23,18 @@ const catogary = document.getElementById("catogary");
 const user_email_id = document.getElementById("user_email_id");
 const save_expense = document.getElementById("save_expense");
 
+
+const logout=()=>{
+  const appendDiv = document.getElementById("logout1");
+  const logout_button = document.createElement("button");
+  appendDiv.appendChild(logout_button);
+  logout_button.innerText = "Logout";
+  logout_button.addEventListener("click", () => {
+    localStorage.removeItem("jwtkey");
+    window.location = "login_page.html";
+  });
+}
+logout()
 save_expense.addEventListener("click", () => {
   console.log("expense data save button clicked");
   async function abc() {
@@ -45,17 +50,18 @@ save_expense.addEventListener("click", () => {
     }
 
     //this function return respusnse as promise which acess using .then(), .catch()
-    return await axios.post(webHost+"/user/expenseData", {
-      expense_amount: expense_amount.value,
-      discription: discription.value,
-      catogary: catogary.value,
-      user_email_id: user_email_id.value,
-      Headers: { authorization_token: localStorage.getItem("jwtkey") },
-    },
-    {
-      headers:{"Authorization":localStorage.getItem("jwtkey")}
-    }
-    
+    return await axios.post(
+      webHost + "/user/expenseData",
+      {
+        expense_amount: expense_amount.value,
+        discription: discription.value,
+        catogary: catogary.value,
+        user_email_id: user_email_id.value,
+        Headers: { authorization_token: localStorage.getItem("jwtkey") },
+      },
+      {
+        headers: { Authorization: localStorage.getItem("jwtkey") },
+      }
     );
   }
   abc()
@@ -81,13 +87,15 @@ async function fetchAllExpenses() {
   }
 
   console.log("dashboard");
-  const result = await axios.post(webHost+"/user/getExpenseData", {
-    Headers: {
-      authorization_token: jwtToken,
-    },
-  },
+  const result = await axios.post(
+    webHost + "/user/getExpenseData",
     {
-      headers:{"Authorization":localStorage.getItem("jwtkey")}
+      Headers: {
+        authorization_token: jwtToken,
+      },
+    },
+    {
+      headers: { Authorization: localStorage.getItem("jwtkey") },
     }
   );
   // const userName = document.getElementById("user_name");
@@ -100,14 +108,7 @@ async function fetchAllExpenses() {
   //logout button
   //logic-just delete the localstorage delete key
 
-  const appendDiv = document.getElementById("logout1");
-  const logout_button = document.createElement("button");
-  appendDiv.appendChild(logout_button);
-  logout_button.innerText = "Logout";
-  logout_button.addEventListener("click", () => {
-    localStorage.removeItem("jwtkey")
-    window.location="login_user.html"
-  });
+
 
   console.log(result.data.resp, "response_by_api");
   const expenseData = result.data.resp;
@@ -139,10 +140,10 @@ async function fetchAllExpenses() {
 
     delete_btn.addEventListener("click", (e) => {
       axios
-        .post(webHost+"/user/expenseData/" + e.target.id,{
-
-        },
-         {headers:{"Authorization":localStorage.getItem("jwtkey")}}
+        .post(
+          webHost + "/user/expenseData/" + e.target.id,
+          {},
+          { headers: { Authorization: localStorage.getItem("jwtkey") } }
         )
         .then((a) => {
           if (a.data == 0) {
@@ -173,14 +174,15 @@ async function fetchAllExpenses() {
       console.log(all_data, "edit expense data");
 
       axios
-        .post(webHost+"/user/editExpenseData/" + e.target.id, {
-          expense_amount: expense_amount.value,
-          discription: discription.value,
-          catogary: catogary.value,
-          id: e.target.id,
-        },
-        {headers:{"Authorization":localStorage.getItem("jwtkey")}}
-        
+        .post(
+          webHost + "/user/editExpenseData/" + e.target.id,
+          {
+            expense_amount: expense_amount.value,
+            discription: discription.value,
+            catogary: catogary.value,
+            id: e.target.id,
+          },
+          { headers: { Authorization: localStorage.getItem("jwtkey") } }
         )
         .then((a) => {
           console.log(a, "in edit api then");
@@ -196,8 +198,8 @@ async function fetchAllExpenses() {
   });
 }
 // fetchAllExpenses()
-async function fetch_paginated_Expenses(limit,page) {
-  console.log("fetch_paginated_Expenses() on")
+async function fetch_paginated_Expenses(limit, page) {
+  console.log("fetch_paginated_Expenses() on");
   const jwtToken = localStorage.getItem("jwtkey");
   if (!jwtToken) {
     alert("you are not login,jwt in not in localstroage");
@@ -210,9 +212,10 @@ async function fetch_paginated_Expenses(limit,page) {
   }
 
   console.log("paginated data fetch");
-  const result = await axios.get(webHost+`/user/ExpenseData_paginated?limit=${limit}&page=${page}`, 
+  const result = await axios.get(
+    webHost + `/user/ExpenseData_paginated?limit=${limit}&page=${page}`,
     {
-      headers:{"Authorization":localStorage.getItem("jwtkey")}
+      headers: { Authorization: localStorage.getItem("jwtkey") },
     }
   );
   // const userName = document.getElementById("user_name");
@@ -222,23 +225,21 @@ async function fetch_paginated_Expenses(limit,page) {
   // userEmail.innerText = userDetails.email;
   // console.log(result, "in fetchAllExpenses() function");
 
-  //logout button
-  //logic-just delete the localstorage delete key
+  // //logout button
+  // //logic-just delete the localstorage delete key
 
-  const appendDiv = document.getElementById("logout1");
-  const logout_button = document.createElement("button");
-  appendDiv.appendChild(logout_button);
-  logout_button.innerText = "Logout";
-  logout_button.addEventListener("click", () => {
-    localStorage.removeItem("jwtkey")
-    location.reload()
-  });
+  // const appendDiv = document.getElementById("logout1");
+  // const logout_button = document.createElement("button");
+  // appendDiv.appendChild(logout_button);
+  // logout_button.innerText = "Logout";
+  // logout_button.addEventListener("click", () => {
+  //   localStorage.removeItem("jwtkey");
+  //   location.reload();
+  // });
 
-
-
-  if(!result.data.status){
+  if (!result.data.status) {
     alert(result.data.message);
-    return
+    return;
   }
   console.log(result, "resposebyapi");
   const expenseData = result.data.data;
@@ -270,10 +271,10 @@ async function fetch_paginated_Expenses(limit,page) {
 
     delete_btn.addEventListener("click", (e) => {
       axios
-        .post(webHost+"/user/expenseData/" + e.target.id,{
-
-        },
-         {headers:{"Authorization":localStorage.getItem("jwtkey")}}
+        .post(
+          webHost + "/user/expenseData/" + e.target.id,
+          {},
+          { headers: { Authorization: localStorage.getItem("jwtkey") } }
         )
         .then((a) => {
           if (a.data == 0) {
@@ -304,14 +305,15 @@ async function fetch_paginated_Expenses(limit,page) {
       console.log(all_data, "edit expense data");
 
       axios
-        .post(webHost+"/user/editExpenseData/" + e.target.id, {
-          expense_amount: expense_amount.value,
-          discription: discription.value,
-          catogary: catogary.value,
-          id: e.target.id,
-        },
-        {headers:{"Authorization":localStorage.getItem("jwtkey")}}
-        
+        .post(
+          webHost + "/user/editExpenseData/" + e.target.id,
+          {
+            expense_amount: expense_amount.value,
+            discription: discription.value,
+            catogary: catogary.value,
+            id: e.target.id,
+          },
+          { headers: { Authorization: localStorage.getItem("jwtkey") } }
         )
         .then((a) => {
           console.log(a, "in edit api then");
@@ -325,30 +327,26 @@ async function fetch_paginated_Expenses(limit,page) {
     const br = document.createElement("br");
     div1.appendChild(edit_btn);
   });
-  return {status:result.data.status,message:result.data.message}
+  return { status: result.data.status, message: result.data.message };
 }
 
-
 //next button and limit
-let next_page=1;
-const limit_inp=document.getElementById("limit_inp")
-const next_btn=document.getElementById("next_btn");
+let next_page = 1;
+const limit_inp = document.getElementById("limit_inp");
+const next_btn = document.getElementById("next_btn");
 
-fetch_paginated_Expenses(limit_inp.value,1)//defaul load or starter load data
+fetch_paginated_Expenses(limit_inp.value, 1); //defaul load or starter load data
 
+limit_inp.addEventListener("change", () => {
+  const display_data = document.getElementById("display_data");
+  display_data.innerHTML = "";
+  const limit_value = limit_inp.value;
+  next_page = 1;
+  fetch_paginated_Expenses(limit_inp.value, next_page); //if limit input change then loard strater/first data
+});
 
-
-limit_inp.addEventListener("change",()=>{
-  const display_data=document.getElementById("display_data");
-display_data.innerHTML="";
-  const limit_value=limit_inp.value;
-  next_page=1;
-  fetch_paginated_Expenses(limit_inp.value,next_page)//if limit input change then loard strater/first data
-})
-
-next_btn.addEventListener("click",()=>{
-
-  const limit=document.getElementById("limit_inp").value
+next_btn.addEventListener("click", () => {
+  const limit = document.getElementById("limit_inp").value;
   next_page++;
- const resp= fetch_paginated_Expenses(limit_inp.value,next_page)
-})
+  const resp = fetch_paginated_Expenses(limit_inp.value, next_page);
+});
