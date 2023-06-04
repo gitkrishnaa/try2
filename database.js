@@ -10,7 +10,7 @@
 // module.exports=conn.promise()
 require("dotenv").config();
 
-const DB_HOST=process.env.DB_HOST
+const DB_HOST=process.env.DATABASE_HOST
 const DATABASE_DIALECT=process.env.DATABASE_DIALECT
 const DATABASE_SCHEMA_NAME=process.env.DATABASE_SCHEMA_NAME
 const DB_HOST_PASSWORD=process.env.DATABASE_PASSWORD
