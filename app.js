@@ -22,7 +22,7 @@ app.use(helmet())
 app.use(morgan("combined"))
 
 app.use(function(req, res, next) { 
-  res.setHeader( 'Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ); 
+  res.setHeader( 'Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js https://checkout.razorpay.com/v1/checkout.js  " ); 
   next(); 
 })
 
